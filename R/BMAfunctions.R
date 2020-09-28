@@ -28,7 +28,7 @@ CompLogML <- function(D, delta){
   #D should be the "squished" marginal table
   #delta is the prior cell counts
   #if (dim(D)[2]%%2 != 0){ print('problem! This is not a marginal table!')}
-  out <- apply(lgamma(D + delta), 1, sum) - apply(lgamma(D*0 + delta), 1, sum)
+  out <- rowSums(lgamma(D + delta)) - rowSums(lgamma(D*0 + delta))
   return(out)
 }
 
@@ -82,37 +82,38 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
 
   #get number of lists
   p <- length(dim(Y))
-  
+
   #set the missing cell to be 0
-  Y[1] <- 0 
-  
+  Y[1] <- 0
+
   #model x estimate weights go in here
   modNweights <- matrix(nrow = length(graphs), ncol = length(Nmissing))
-  
-  
+
+
   #first pre-compute the matrix of component-wise LMLs
   compMat <- MakeCompMatrix(p, delta, Y, Nmissing) # all but the last graph (the one that doesn't really matter) match with matlab code for 3 lists
 
   j <- 1
-  for(graph in graphs){#loop over all possible models
+  for(graph in graphs){
+    #loop over all possible models
     #graph$C cliques of the graph
     #graph$S separators
     binC <-t(sapply(graph$C, tmpfun, p = p))
-    decC <- apply(t(binC)*rev(2^(0:(p-1))), 2, sum)
+    decC <- colSums(t(binC)*rev(2^(0:(p-1))))
     compMats <- compMat[decC,]
     if(!is.null(nrow(compMats))){
-      cliqueML <- apply(compMats, 2, sum)
+      cliqueML <- colSums(compMats)
     }else{cliqueML <- compMats}
 
     if(!is.null(graph$S)){
       binS <-t(sapply(graph$S, tmpfun, p = p))
-      decS <- apply(t(binS)*rev(2^(0:(p-1))), 2, sum)
+      decS <- colSums(t(binS)*rev(2^(0:(p-1))))
 
       compMats <- compMat[decS,]
       if(!is.null(nrow(compMats))){
-        sepML <- apply(compMats, 2, sum)
+        sepML <- colSums(compMats)
       }else{sepML <- compMats}
-    }else{sepML <- 0; decS <- NULL}
+    } else{sepML <- 0; decS <- NULL}
 
     nsubgraphs <- length(decC) - length(decS)
     #nsubgraph.*(gammaln(sum(alpha))-gammaln(N+sum(alpha)));
@@ -133,7 +134,7 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
   if(is.null(logprior)){
   logprior <- -log(sum(Y) + Nmissing)}
 
-  modNweights <- t(t(modNweights) + logprior) 
+  modNweights <- t(t(modNweights) + logprior)
 
   if(!is.null(log.prior.model.weights)){
     modNweights <- modNweights + log.prior.model.weights
@@ -143,7 +144,7 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
     modNweights <- modNweights - max(modNweights)
     weights <- exp(modNweights)
     weights <- weights/sum(weights)
-  } else{ 
+  } else{
       weights <- modNweights
     }
   return(weights)
@@ -151,9 +152,9 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
 
 plotPosteriorN <- function(weights, N, main=NULL){
   #this function
-  plot(N, apply(weights, 2, sum), type = 'l', col = 'black', lwd = 3, ylab = "Posterior Probability of N", xlab = "N", ylim=c(0, 1.25*max(apply(weights, 2, sum))))
+  plot(N, colSums(weights), type = 'l', col = 'black', lwd = 3, ylab = "Posterior Probability of N", xlab = "N", ylim=c(0, 1.25*max(colSums(weights))))
   title(main)
-  wts <- apply(weights, 1, sum)
+  wts <- rowSums(weights)
   for(i in 1:nrow(weights)){
     lines(N, weights[i,], lwd = wts[i]*3, lty = 'dashed')
   }
