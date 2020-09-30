@@ -93,6 +93,8 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
   #first pre-compute the matrix of component-wise LMLs
   compMat <- MakeCompMatrix(p, delta, Y, Nmissing) # all but the last graph (the one that doesn't really matter) match with matlab code for 3 lists
 
+  alpha <- rep(delta, length(Y))
+  D <- lgamma(sum(alpha)) - lgamma(Nmissing + sum(Y) + sum(alpha))
   j <- 1
   for(graph in graphs){
     #loop over all possible models
@@ -116,10 +118,9 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
     } else{sepML <- 0; decS <- NULL}
 
     nsubgraphs <- length(decC) - length(decS)
-    #nsubgraph.*(gammaln(sum(alpha))-gammaln(N+sum(alpha)));
 
     alpha <- rep(delta, length(Y))
-    modNweights[j,] <- (cliqueML - sepML + nsubgraphs*(lgamma(sum(alpha)) - lgamma(Nmissing + sum(Y) + sum(alpha))))
+    modNweights[j,] <- cliqueML - sepML + nsubgraphs*D
     j <- j + 1
   }
 
@@ -141,8 +142,7 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
   }
 
   if(normalize){
-    modNweights <- modNweights - max(modNweights)
-    weights <- exp(modNweights)
+    weights <- exp(modNweights - max(modNweights))
     weights <- weights/sum(weights)
   } else{
       weights <- modNweights

@@ -11,5 +11,6 @@ LazyLoad: yes
 Imports: chron
 Packaged: 2015-04-16 14:42:17 UTC; kristianlum
 NeedsCompilation: no
+ByteCompile: yes
 Repository: CRAN
 Date/Publication: 2015-04-16 19:53:41
