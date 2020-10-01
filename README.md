@@ -6,6 +6,8 @@ Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum
 
 Higher performance is needed to account for linkage errors through linkage-averaging and for simulation studies.
 
+**Note:** the statification functions and Venn diagram plotting functions from the `dga` package have not been reproduced in `dgaFast`. They can be accessed through `install.packages("dga"); library(dga)`.
+
 ## Example usage
 
 Five lists example from Madigan and York (1997) as implemented in the `dga` package:
@@ -34,6 +36,7 @@ plotPosteriorN(weights, sum(Y) + Nmissing)
 Performance gain (2013 MacBook Pro 2.6 GHz Intel Core i5):
 
 ```r
+if (!require(dga)) install.packages("dga")
 bench::mark(
      dga::bma.cr(Y,  Nmissing, delta, graphs5),
      dgaFast::bma.cr(Y,  Nmissing, delta, graphs5), 
