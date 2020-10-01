@@ -1,56 +1,46 @@
-#include <Rcpp.h>
+#include <RcppArmadillo.h>
 using namespace Rcpp;
 
-NumericVector colSumsSub(const NumericMatrix& mat,
-                         const IntegerVector& rowIDs) {
-  int ncols = mat.ncol();
-  NumericVector sum(ncols);
+// [[Rcpp::export]]
+arma::rowvec colSumsSub(const arma::mat& mat,
+                         const arma::uvec& rowIDs) {
 
-  int i;
-  for (IntegerVector::const_iterator it = rowIDs.begin(); it != rowIDs.end(); ++it) {
-    i = *it - 1;
-    sum += mat(i, _);
-  }
-
-  return sum;
+  return arma::sum(mat.rows(rowIDs-1), 0);
 }
 
 // [[Rcpp::export]]
-NumericVector computeML(const NumericMatrix& compMat,
-                        const IntegerVector& decC,
-                        const IntegerVector& decS,
-                        const NumericVector& denominator) {
+void computeML(arma::mat& inPlace,
+                        int j,
+                        const arma::mat& compMat,
+                        const arma::uvec& decC,
+                        const arma::uvec& decS,
+                        const arma::rowvec& denominator) {
 
-  double nsubgraphs = decC.size() - decS.size();
+  double nsubgraphs = decC.n_elem - decS.n_elem;
 
-  return colSumsSub(compMat, decC)
+  inPlace.row(j-1) = colSumsSub(compMat, decC)
     - colSumsSub(compMat, decS)
     + nsubgraphs*denominator;
 }
 
 // [[Rcpp::export]]
-void rowAdd(NumericMatrix& mat,
-            const NumericVector& vect) {
+void rowAdd(arma::mat& mat,
+            const arma::rowvec& v) {
 
-  double v;
-  for (int j = 0; j < mat.ncol(); j++) {
-    v = vect(j);
-    for (int i = 0; i < mat.nrow(); i++) {
-      mat(i,j) += v;
-    }
-  }
+  mat.each_row() += v;
 }
 
 // [[Rcpp::export]]
-void colAdd(NumericMatrix& mat,
-            const NumericVector& vect) {
+void colAdd(arma::mat& mat,
+            const arma::colvec& v) {
 
-  double v;
-  for (int i = 0; i < mat.nrow(); i++) {
-    v = vect(i);
-    for (int j = 0; j < mat.ncol(); j++) {
-      mat(i,j) += v;
-    }
-  }
+  mat.each_col() += v;
 }
+
+// [[Rcpp::export]]
+void expNormalize(arma::mat& mat) {
+  mat = exp(mat);
+  mat = mat/sum(sum(mat));
+}
+
 
