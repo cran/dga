@@ -2,10 +2,14 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 computeML <- function(compMat, decC, decS, denominator) {
-    .Call('_dga_computeML', PACKAGE = 'dga', compMat, decC, decS, denominator)
+    .Call(`_dga_computeML`, compMat, decC, decS, denominator)
 }
 
 rowAdd <- function(mat, vect) {
-    invisible(.Call('_dga_rowAdd', PACKAGE = 'dga', mat, vect))
+    invisible(.Call(`_dga_rowAdd`, mat, vect))
+}
+
+colAdd <- function(mat, vect) {
+    invisible(.Call(`_dga_colAdd`, mat, vect))
 }
 

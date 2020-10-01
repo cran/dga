@@ -40,3 +40,17 @@ void rowAdd(NumericMatrix& mat,
     }
   }
 }
+
+// [[Rcpp::export]]
+void colAdd(NumericMatrix& mat,
+            const NumericVector& vect) {
+
+  double v;
+  for (int i = 0; i < mat.nrow(); i++) {
+    v = vect(i);
+    for (int j = 0; j < mat.ncol(); j++) {
+      mat(i,j) += v;
+    }
+  }
+}
+

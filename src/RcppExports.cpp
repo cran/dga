@@ -30,10 +30,22 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// colAdd
+void colAdd(NumericMatrix& mat, const NumericVector& vect);
+RcppExport SEXP _dga_colAdd(SEXP matSEXP, SEXP vectSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix& >::type mat(matSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type vect(vectSEXP);
+    colAdd(mat, vect);
+    return R_NilValue;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_dga_computeML", (DL_FUNC) &_dga_computeML, 4},
     {"_dga_rowAdd", (DL_FUNC) &_dga_rowAdd, 2},
+    {"_dga_colAdd", (DL_FUNC) &_dga_colAdd, 2},
     {NULL, NULL, 0}
 };
 
