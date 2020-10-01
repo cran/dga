@@ -1,6 +1,5 @@
 #' @export
 plotPosteriorN <- function(weights, N, main = NULL) {
-  # this function
   plot(N, colSums(weights), type = "l", col = "black", lwd = 3, ylab = "Posterior Probability of N", xlab = "N", ylim = c(0, 1.25 * max(colSums(weights))))
   title(main)
   wts <- rowSums(weights)
