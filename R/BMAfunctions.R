@@ -64,6 +64,7 @@ MakeCompMatrix <- function(p, delta, Y, Nmissing){
   return(compLMLs)
 }
 
+#' @export
 bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.weights=NULL, normalize=TRUE){
   #function to madigan + york style bma
   #Y is the array of counts.. should be dimension 2x2x2 (if p = 3)
@@ -80,8 +81,7 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
   Y[1] <- 0
 
   #model x estimate weights go in here
-  modNweights <- matrix(nrow = length(graphs), ncol = length(Nmissing))
-
+  modNweights <- array(dim=c(length(graphs), length(Nmissing)))
 
   #first pre-compute the matrix of component-wise LMLs
   compMat <- MakeCompMatrix(p, delta, Y, Nmissing) # all but the last graph (the one that doesn't really matter) match with matlab code for 3 lists
@@ -91,19 +91,15 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
   j <- 1
   for(graph in graphs){
     decC <- sapply(graph$C, function(g) sum(2^(p-g)))
-    cliqueML <- colSums(compMat[decC, , drop=FALSE])
 
     if(!is.null(graph$S)){
       decS <- sapply(graph$S, function(g) sum(2^(p-g)))
-      sepML <- colSums(compMat[decS, , drop=FALSE])
     } else{
-      sepML <- 0; decS <- NULL
+      decS = array(dim=0)
     }
 
-    nsubgraphs <- length(decC) - length(decS)
+    modNweights[j,] = computeML(compMat, decC, decS, D)
 
-    alpha <- rep(delta, length(Y))
-    modNweights[j,] <- cliqueML - sepML + nsubgraphs*D
     j <- j + 1
   }
 
@@ -112,16 +108,16 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
   multicoef <- lgamma(Nmissing + sum(Y) + 1) - sum(lgamma(Y[-1] + 1)) - lgamma(Nmissing + 1)
   #multicoef <- lgamma(Nmissing + sum(Y) ) - sum(lgamma(Y[-1] )) - lgamma(Nmissing )
 
-  modNweights <- t(t(modNweights) + multicoef)
+  rowAdd(modNweights, multicoef)
 
   #add on prior
   if(is.null(logprior)){
   logprior <- -log(sum(Y) + Nmissing)}
 
-  modNweights <- t(t(modNweights) + logprior)
+  rowAdd(modNweights, logprior)
 
   if(!is.null(log.prior.model.weights)){
-    modNweights <- modNweights + log.prior.model.weights
+    rowAdd(modNweights, log.prior.model.weights)
   }
 
   if(normalize){
@@ -133,6 +129,7 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
   return(weights)
 }
 
+#' @export
 plotPosteriorN <- function(weights, N, main=NULL){
   #this function
   plot(N, colSums(weights), type = 'l', col = 'black', lwd = 3, ylab = "Posterior Probability of N", xlab = "N", ylim=c(0, 1.25*max(colSums(weights))))
@@ -158,6 +155,7 @@ plotPosteriorN <- function(weights, N, main=NULL){
 #  }
 #}
 
+#' @export
 makeAdjMatrix <- function(graph, p){
   Adj <- matrix(0, nrow = p, ncol = p)
   diag(Adj) <- 1

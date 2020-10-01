@@ -1,2 +1,6 @@
+useDynLib(dga, .registration=TRUE)
 exportPattern("^[[:alpha:]]+")
-import(chron)
+importFrom(Rcpp, evalCpp)
+export(bma.cr)
+export(makeAdjMatrix)
+export(plotPosteriorN)
