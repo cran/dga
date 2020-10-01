@@ -1,6 +1,6 @@
 # :dart: dgaFast: Multiple Systems Estimation Using Decomposable Graphical Models
 
-![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
+[![Build Status](https://travis-ci.com/OlivierBinette/dga.svg?branch=master)](https://travis-ci.com/OlivierBinette/dga) ![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
 
 Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs capture-recapture estimation by averaging over decomposable graphical models. This approach builds on Madigan and York (1997)." 
 
