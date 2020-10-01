@@ -2,7 +2,9 @@
 
 ![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
 
-Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs capture-recapture estimation by averaging over decomposable graphical models. This approach builds on Madigan and York (1997)." Higher performance is required to account for linkage errors through linkage-averaging and for simulation studies.
+Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs capture-recapture estimation by averaging over decomposable graphical models. This approach builds on Madigan and York (1997)." 
+
+Higher performance is needed to account for linkage errors through linkage-averaging and for simulation studies.
 
 ## Example usage
 
