@@ -1,21 +1,20 @@
-Package: dga
+Package: dgaFast
 Type: Package
-Title: Capture-Recapture Estimation using Bayesian Model Averaging
-Version: 1.2
-Date: 2015-04-16
-Author: James Johndrow, Kristian Lum, and Patrick Ball
-Maintainer: Kristian Lum <kl@hrdag.org>
-Description: Performs Bayesian model averaging for capture-recapture. This includes code to stratify records, check the strata for suitable overlap to be used for capture-recapture, and some functions to plot the estimated population size. 
+Title: Multiple Systems Estimation Using Decomposable Graphical Models
+Description: This is an efficient re-implementation of the dga package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs Bayesian model averaging for capture-recapture. This includes code to stratify records, check the strata for suitable overlap to be used for capture-recapture, and some functions to plot the estimated population size."
+Version: 0.0.0.1
+Date: October 1, 2020
+Author: Olivier Binette
 License: GPL (>= 2)
-LazyLoad: yes
+LazyLoad: no
 Imports: 
     chron,
     Rcpp
-Packaged: 2015-04-16 14:42:17 UTC; kristianlum
-NeedsCompilation: no
+Suggests:
+    dga
+NeedsCompilation: yes
 ByteCompile: yes
-Repository: CRAN
-Date/Publication: 2015-04-16 19:53:41
+Repository: GitHub
 RoxygenNote: 7.1.1
 LinkingTo: 
     Rcpp,

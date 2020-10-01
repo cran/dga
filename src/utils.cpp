@@ -3,7 +3,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export]]
 arma::rowvec colSumsSub(const arma::mat& mat,
-                         const arma::uvec& rowIDs) {
+                        const arma::uvec& rowIDs) {
 
   return arma::sum(mat.rows(rowIDs-1), 0);
 }
@@ -48,13 +48,13 @@ void computeML(arma::mat& inPlace,
 }
 
 // [[Rcpp::export]]
-arma::mat computeLogPostProbs(
-                         const arma::mat& compMat,
-                         const Rcpp::List& graphs,
-                         const arma::rowvec& denominator,
-                         int p,
-                         int Nmissing) {
+arma::mat computeLogPostProbs(const arma::mat& compMat,
+                              const Rcpp::List& graphs,
+                              const arma::rowvec& denominator,
+                              int p) {
   int N = graphs.size();
+  int Nmissing = compMat.n_cols;
+
   arma::mat weights(N, Nmissing);
   Rcpp::List graph;
   for (int j = 1; j <= N; j++) {

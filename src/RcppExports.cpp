@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // colSumsSub
 arma::rowvec colSumsSub(const arma::mat& mat, const arma::uvec& rowIDs);
-RcppExport SEXP _dga_colSumsSub(SEXP matSEXP, SEXP rowIDsSEXP) {
+RcppExport SEXP _dgaFast_colSumsSub(SEXP matSEXP, SEXP rowIDsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +20,7 @@ END_RCPP
 }
 // dec
 double dec(const Rcpp::IntegerVector I, int p);
-RcppExport SEXP _dga_dec(SEXP ISEXP, SEXP pSEXP) {
+RcppExport SEXP _dgaFast_dec(SEXP ISEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,7 +32,7 @@ END_RCPP
 }
 // decClique
 arma::uvec decClique(const Rcpp::List cliques, int p);
-RcppExport SEXP _dga_decClique(SEXP cliquesSEXP, SEXP pSEXP) {
+RcppExport SEXP _dgaFast_decClique(SEXP cliquesSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -44,7 +44,7 @@ END_RCPP
 }
 // computeML
 void computeML(arma::mat& inPlace, int j, const arma::mat& compMat, const Rcpp::List& C, const Rcpp::List& S, const arma::rowvec& denominator, int p);
-RcppExport SEXP _dga_computeML(SEXP inPlaceSEXP, SEXP jSEXP, SEXP compMatSEXP, SEXP CSEXP, SEXP SSEXP, SEXP denominatorSEXP, SEXP pSEXP) {
+RcppExport SEXP _dgaFast_computeML(SEXP inPlaceSEXP, SEXP jSEXP, SEXP compMatSEXP, SEXP CSEXP, SEXP SSEXP, SEXP denominatorSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type inPlace(inPlaceSEXP);
@@ -59,8 +59,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // computeLogPostProbs
-arma::mat computeLogPostProbs(const arma::mat& compMat, const Rcpp::List& graphs, const arma::rowvec& denominator, int p, int Nmissing);
-RcppExport SEXP _dga_computeLogPostProbs(SEXP compMatSEXP, SEXP graphsSEXP, SEXP denominatorSEXP, SEXP pSEXP, SEXP NmissingSEXP) {
+arma::mat computeLogPostProbs(const arma::mat& compMat, const Rcpp::List& graphs, const arma::rowvec& denominator, int p);
+RcppExport SEXP _dgaFast_computeLogPostProbs(SEXP compMatSEXP, SEXP graphsSEXP, SEXP denominatorSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -68,14 +68,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const Rcpp::List& >::type graphs(graphsSEXP);
     Rcpp::traits::input_parameter< const arma::rowvec& >::type denominator(denominatorSEXP);
     Rcpp::traits::input_parameter< int >::type p(pSEXP);
-    Rcpp::traits::input_parameter< int >::type Nmissing(NmissingSEXP);
-    rcpp_result_gen = Rcpp::wrap(computeLogPostProbs(compMat, graphs, denominator, p, Nmissing));
+    rcpp_result_gen = Rcpp::wrap(computeLogPostProbs(compMat, graphs, denominator, p));
     return rcpp_result_gen;
 END_RCPP
 }
 // rowAdd
 void rowAdd(arma::mat& mat, const arma::rowvec& v);
-RcppExport SEXP _dga_rowAdd(SEXP matSEXP, SEXP vSEXP) {
+RcppExport SEXP _dgaFast_rowAdd(SEXP matSEXP, SEXP vSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type mat(matSEXP);
@@ -86,7 +85,7 @@ END_RCPP
 }
 // colAdd
 void colAdd(arma::mat& mat, const arma::colvec& v);
-RcppExport SEXP _dga_colAdd(SEXP matSEXP, SEXP vSEXP) {
+RcppExport SEXP _dgaFast_colAdd(SEXP matSEXP, SEXP vSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type mat(matSEXP);
@@ -97,7 +96,7 @@ END_RCPP
 }
 // expNormalize
 void expNormalize(arma::mat& mat);
-RcppExport SEXP _dga_expNormalize(SEXP matSEXP) {
+RcppExport SEXP _dgaFast_expNormalize(SEXP matSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type mat(matSEXP);
@@ -107,18 +106,18 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_dga_colSumsSub", (DL_FUNC) &_dga_colSumsSub, 2},
-    {"_dga_dec", (DL_FUNC) &_dga_dec, 2},
-    {"_dga_decClique", (DL_FUNC) &_dga_decClique, 2},
-    {"_dga_computeML", (DL_FUNC) &_dga_computeML, 7},
-    {"_dga_computeLogPostProbs", (DL_FUNC) &_dga_computeLogPostProbs, 5},
-    {"_dga_rowAdd", (DL_FUNC) &_dga_rowAdd, 2},
-    {"_dga_colAdd", (DL_FUNC) &_dga_colAdd, 2},
-    {"_dga_expNormalize", (DL_FUNC) &_dga_expNormalize, 1},
+    {"_dgaFast_colSumsSub", (DL_FUNC) &_dgaFast_colSumsSub, 2},
+    {"_dgaFast_dec", (DL_FUNC) &_dgaFast_dec, 2},
+    {"_dgaFast_decClique", (DL_FUNC) &_dgaFast_decClique, 2},
+    {"_dgaFast_computeML", (DL_FUNC) &_dgaFast_computeML, 7},
+    {"_dgaFast_computeLogPostProbs", (DL_FUNC) &_dgaFast_computeLogPostProbs, 4},
+    {"_dgaFast_rowAdd", (DL_FUNC) &_dgaFast_rowAdd, 2},
+    {"_dgaFast_colAdd", (DL_FUNC) &_dgaFast_colAdd, 2},
+    {"_dgaFast_expNormalize", (DL_FUNC) &_dgaFast_expNormalize, 1},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_dga(DllInfo *dll) {
+RcppExport void R_init_dgaFast(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

@@ -2,34 +2,34 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 colSumsSub <- function(mat, rowIDs) {
-    .Call(`_dga_colSumsSub`, mat, rowIDs)
+    .Call(`_dgaFast_colSumsSub`, mat, rowIDs)
 }
 
 dec <- function(I, p) {
-    .Call(`_dga_dec`, I, p)
+    .Call(`_dgaFast_dec`, I, p)
 }
 
 decClique <- function(cliques, p) {
-    .Call(`_dga_decClique`, cliques, p)
+    .Call(`_dgaFast_decClique`, cliques, p)
 }
 
 computeML <- function(inPlace, j, compMat, C, S, denominator, p) {
-    invisible(.Call(`_dga_computeML`, inPlace, j, compMat, C, S, denominator, p))
+    invisible(.Call(`_dgaFast_computeML`, inPlace, j, compMat, C, S, denominator, p))
 }
 
-computeLogPostProbs <- function(compMat, graphs, denominator, p, Nmissing) {
-    .Call(`_dga_computeLogPostProbs`, compMat, graphs, denominator, p, Nmissing)
+computeLogPostProbs <- function(compMat, graphs, denominator, p) {
+    .Call(`_dgaFast_computeLogPostProbs`, compMat, graphs, denominator, p)
 }
 
 rowAdd <- function(mat, v) {
-    invisible(.Call(`_dga_rowAdd`, mat, v))
+    invisible(.Call(`_dgaFast_rowAdd`, mat, v))
 }
 
 colAdd <- function(mat, v) {
-    invisible(.Call(`_dga_colAdd`, mat, v))
+    invisible(.Call(`_dgaFast_colAdd`, mat, v))
 }
 
 expNormalize <- function(mat) {
-    invisible(.Call(`_dga_expNormalize`, mat))
+    invisible(.Call(`_dgaFast_expNormalize`, mat))
 }
 

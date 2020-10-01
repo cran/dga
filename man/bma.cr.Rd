@@ -7,7 +7,7 @@ Bayesiam Model Averaging for Capture-Recapture}
 \description{
 This function averages over all decomposable graphical models for p lists. }
 \usage{
-bma.cr(Y, Nmissing, delta, graphs, logprior = NULL, 
+bma.cr(Y, Nmissing, delta, graphs, logprior = NULL,
 		log.prior.model.weights, normalize)
 }
 \arguments{
@@ -18,7 +18,6 @@ bma.cr(Y, Nmissing, delta, graphs, logprior = NULL,
   	\item{logprior}{ The log of the prior probability of each value in Nmissing. If left blank, this will default to the -log(Nmissing).}
 	\item{log.prior.model.weights}{
 Prior weights on the graphs. This should be a vector of length length(graphs).	}
-	\item{normalize}{Default is TRUE. This is mostly for debugging. Should we normalize everything to output posterior probabilities?}
 }
 \details{
 This is the main function in this package.  It performs capture-recapture (or multiple systems estimation) using Bayesian model averaging as outlined in Madigan and York (1997).}
@@ -43,7 +42,7 @@ N <- Nmissing + sum(Y)
 data(graphs5)
 weights <- bma.cr(Y,  Nmissing, delta, graphs5	)
 plotPosteriorN(weights, N)
- 
+
 ##### 3 list example from M & Y #######
 Y <- c(0, 60, 49, 4, 247, 112, 142, 12)
 Y <- array(Y, dim=c(2,2,2))
