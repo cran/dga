@@ -42,8 +42,8 @@ if (!require(pacman)) install.packages("pacman")
 pacman::p_load(bench, dga)
 
 bench::mark(
-     dga::bma.cr(Y,  Nmissing, delta, graphs5),
-     dgaFast::bma.cr(Y,  Nmissing, delta, graphs5), 
+     dga::bma.cr(Y, Nmissing, delta, graphs5),
+     dgaFast::bma.cr(Y, Nmissing, delta, graphs5), 
      min_iterations=10, check=FALSE)
 ```
 
