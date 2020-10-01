@@ -19,10 +19,9 @@ bma.cr <- function(Y, Nmissing, delta, graphs,
   weights <- array(0, dim = c(length(graphs), length(Nmissing)))
   for (j in seq_along(graphs)) {
     decC <- sapply(graphs[[j]]$C, function(g) sum(2^(p - g)))
-    decS <- as.numeric(sapply(graphs[[j]]$S, function(g) sum(2^(p - g)))) # as.numeric coerces empty list to numeric
+    decS <- as.numeric(sapply(graphs[[j]]$S, function(g) sum(2^(p - g))))
     computeML(weights, j, compMat, decC, decS, D)
   }
-  #weights = t(t(weights) + multinomialCoefficient)
   rowAdd(weights, multinomialCoefficient)
   rowAdd(weights, logprior)
   if (!is.null(log.prior.model.weights)) colAdd(weights, log.prior.model.weights)
