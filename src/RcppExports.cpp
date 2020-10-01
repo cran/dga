@@ -18,19 +18,59 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dec
+double dec(const Rcpp::IntegerVector I, int p);
+RcppExport SEXP _dga_dec(SEXP ISEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::IntegerVector >::type I(ISEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(dec(I, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// decClique
+arma::uvec decClique(const Rcpp::List cliques, int p);
+RcppExport SEXP _dga_decClique(SEXP cliquesSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::List >::type cliques(cliquesSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(decClique(cliques, p));
+    return rcpp_result_gen;
+END_RCPP
+}
 // computeML
-void computeML(arma::mat& inPlace, int j, const arma::mat& compMat, const arma::uvec& decC, const arma::uvec& decS, const arma::rowvec& denominator);
-RcppExport SEXP _dga_computeML(SEXP inPlaceSEXP, SEXP jSEXP, SEXP compMatSEXP, SEXP decCSEXP, SEXP decSSEXP, SEXP denominatorSEXP) {
+void computeML(arma::mat& inPlace, int j, const arma::mat& compMat, const Rcpp::List& C, const Rcpp::List& S, const arma::rowvec& denominator, int p);
+RcppExport SEXP _dga_computeML(SEXP inPlaceSEXP, SEXP jSEXP, SEXP compMatSEXP, SEXP CSEXP, SEXP SSEXP, SEXP denominatorSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type inPlace(inPlaceSEXP);
     Rcpp::traits::input_parameter< int >::type j(jSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type compMat(compMatSEXP);
-    Rcpp::traits::input_parameter< const arma::uvec& >::type decC(decCSEXP);
-    Rcpp::traits::input_parameter< const arma::uvec& >::type decS(decSSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type C(CSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type S(SSEXP);
     Rcpp::traits::input_parameter< const arma::rowvec& >::type denominator(denominatorSEXP);
-    computeML(inPlace, j, compMat, decC, decS, denominator);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    computeML(inPlace, j, compMat, C, S, denominator, p);
     return R_NilValue;
+END_RCPP
+}
+// computeLogPostProbs
+arma::mat computeLogPostProbs(const arma::mat& compMat, const Rcpp::List& graphs, const arma::rowvec& denominator, int p, int Nmissing);
+RcppExport SEXP _dga_computeLogPostProbs(SEXP compMatSEXP, SEXP graphsSEXP, SEXP denominatorSEXP, SEXP pSEXP, SEXP NmissingSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type compMat(compMatSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type graphs(graphsSEXP);
+    Rcpp::traits::input_parameter< const arma::rowvec& >::type denominator(denominatorSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    Rcpp::traits::input_parameter< int >::type Nmissing(NmissingSEXP);
+    rcpp_result_gen = Rcpp::wrap(computeLogPostProbs(compMat, graphs, denominator, p, Nmissing));
+    return rcpp_result_gen;
 END_RCPP
 }
 // rowAdd
@@ -68,7 +108,10 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_dga_colSumsSub", (DL_FUNC) &_dga_colSumsSub, 2},
-    {"_dga_computeML", (DL_FUNC) &_dga_computeML, 6},
+    {"_dga_dec", (DL_FUNC) &_dga_dec, 2},
+    {"_dga_decClique", (DL_FUNC) &_dga_decClique, 2},
+    {"_dga_computeML", (DL_FUNC) &_dga_computeML, 7},
+    {"_dga_computeLogPostProbs", (DL_FUNC) &_dga_computeLogPostProbs, 5},
     {"_dga_rowAdd", (DL_FUNC) &_dga_rowAdd, 2},
     {"_dga_colAdd", (DL_FUNC) &_dga_colAdd, 2},
     {"_dga_expNormalize", (DL_FUNC) &_dga_expNormalize, 1},

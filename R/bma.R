@@ -16,12 +16,7 @@ bma.cr <- function(Y, Nmissing, delta, graphs,
   multinomialCoefficient <- lgamma(Nmissing + sum(Y) + 1) - sum(lgamma(Y[-1] + 1)) - lgamma(Nmissing + 1)
 
   # Compute log posterior for all models
-  weights <- array(0, dim = c(length(graphs), length(Nmissing)))
-  for (j in seq_along(graphs)) {
-    decC <- sapply(graphs[[j]]$C, function(g) sum(2^(p - g)))
-    decS <- as.numeric(sapply(graphs[[j]]$S, function(g) sum(2^(p - g))))
-    computeML(weights, j, compMat, decC, decS, D)
-  }
+  weights = computeLogPostProbs(compMat, graphs, D, p, length(Nmissing))
   rowAdd(weights, multinomialCoefficient)
   rowAdd(weights, logprior)
   if (!is.null(log.prior.model.weights)) colAdd(weights, log.prior.model.weights)

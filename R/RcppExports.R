@@ -5,8 +5,20 @@ colSumsSub <- function(mat, rowIDs) {
     .Call(`_dga_colSumsSub`, mat, rowIDs)
 }
 
-computeML <- function(inPlace, j, compMat, decC, decS, denominator) {
-    invisible(.Call(`_dga_computeML`, inPlace, j, compMat, decC, decS, denominator))
+dec <- function(I, p) {
+    .Call(`_dga_dec`, I, p)
+}
+
+decClique <- function(cliques, p) {
+    .Call(`_dga_decClique`, cliques, p)
+}
+
+computeML <- function(inPlace, j, compMat, C, S, denominator, p) {
+    invisible(.Call(`_dga_computeML`, inPlace, j, compMat, C, S, denominator, p))
+}
+
+computeLogPostProbs <- function(compMat, graphs, denominator, p, Nmissing) {
+    .Call(`_dga_computeLogPostProbs`, compMat, graphs, denominator, p, Nmissing)
 }
 
 rowAdd <- function(mat, v) {

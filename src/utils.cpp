@@ -9,18 +9,74 @@ arma::rowvec colSumsSub(const arma::mat& mat,
 }
 
 // [[Rcpp::export]]
+double dec(const Rcpp::IntegerVector I, int p) {
+  double s = 0;
+  for (int i = 0; i < I.size(); i++) {
+    s += pow(2, p - I(i));
+  }
+  return s;
+}
+
+// [[Rcpp::export]]
+arma::uvec decClique(const Rcpp::List cliques, int p) {
+  int n = cliques.size();
+  arma::uvec res(n);
+
+  for(int i = 0; i < n; i++) {
+    res(i) = dec(as<IntegerVector>(cliques[i]), p);
+  }
+
+  return res;
+}
+
+// [[Rcpp::export]]
 void computeML(arma::mat& inPlace,
                         int j,
                         const arma::mat& compMat,
-                        const arma::uvec& decC,
-                        const arma::uvec& decS,
-                        const arma::rowvec& denominator) {
+                        const Rcpp::List& C,
+                        const Rcpp::List& S,
+                        const arma::rowvec& denominator,
+                        int p) {
+  arma::uvec decC = decClique(C, p);
+  arma::uvec decS = decClique(S, p);
 
   double nsubgraphs = decC.n_elem - decS.n_elem;
 
   inPlace.row(j-1) = colSumsSub(compMat, decC)
     - colSumsSub(compMat, decS)
     + nsubgraphs*denominator;
+}
+
+// [[Rcpp::export]]
+arma::mat computeLogPostProbs(
+                         const arma::mat& compMat,
+                         const Rcpp::List& graphs,
+                         const arma::rowvec& denominator,
+                         int p,
+                         int Nmissing) {
+  int N = graphs.size();
+  arma::mat weights(N, Nmissing);
+  Rcpp::List graph;
+  for (int j = 1; j <= N; j++) {
+    graph = as<List>(graphs[j-1]);
+    if (graph.size() == 2) { // Both cliques and separators
+      computeML(weights, j,
+                compMat,
+                as<List>(graph)[0],
+                as<List>(graph)[1],
+                denominator,
+                p);
+    } else { // Only cliques
+      computeML(weights, j,
+                compMat,
+                as<List>(graph)[0],
+                NULL,
+                denominator,
+                p);
+    }
+  }
+
+  return weights;
 }
 
 // [[Rcpp::export]]
