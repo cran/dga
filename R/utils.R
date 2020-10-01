@@ -1,11 +1,6 @@
 CompLogML <- function(D, Nmissing, delta) {
-  res = sapply(Nmissing, function(n) {
-    temp = D
-    temp[1] = temp[1] + n
-    sum(lgamma(temp + delta))
-  }) - length(D)*(lgamma(delta))
-
-  return(res)
+  Nmissing = Nmissing + D[1] + delta
+  lgamma(Nmissing) + sum(lgamma(D[2:length(D)] + delta)) - length(D)*(lgamma(delta))
 }
 
 integer.base.b <- function(x, b = 2) {
@@ -30,10 +25,6 @@ MakeCompMatrix <- function(p, delta, Y, Nmissing) {
   for (i in 1:(2^p - 1)) {
     inds <- which(bins[i, ] == 1)
     D <- c(apply(Y, inds, sum))
-    #Dmat <- t(matrix(D, ncol = length(Nmissing), nrow = length(D)))
-    #Dmat[, 1] <- Dmat[, 1] + Nmissing
-
-    #alpha <- rep(delta * 2^(p - sum(bins[i, ])), ncol(Dmat))
     alpha = delta * 2^(p - sum(bins[i, ]))
     compLMLs[i, ] <- CompLogML(D, Nmissing, alpha)
   }
