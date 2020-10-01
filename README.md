@@ -33,10 +33,13 @@ weights <- bma.cr(Y,  Nmissing, delta, graphs5)
 plotPosteriorN(weights, sum(Y) + Nmissing)
 ```
 
-Performance gain (2013 MacBook Pro 2.6 GHz Intel Core i5):
+## Performance gain:
+
+(2013 MacBook Pro 2.6 GHz Intel Core i5)
 
 ```r
-if (!require(dga)) install.packages("dga")
+if (!require(pacman)) install.packages("pacman")
+pacman::p_load(bench, dga)
 bench::mark(
      dga::bma.cr(Y,  Nmissing, delta, graphs5),
      dgaFast::bma.cr(Y,  Nmissing, delta, graphs5), 
