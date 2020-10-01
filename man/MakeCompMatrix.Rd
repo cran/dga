@@ -27,24 +27,6 @@ A matrix of log marginal likelihoods.
 James Johndrow \email{james.johndrow@gmail.com} and Kristian Lum \email{kl@hrdag.org}
 }
 
-\examples{
-
-## The function is currently defined as
-function (p, delta, Y) 
-{
-    compLMLs <- matrix(0, nrow = 2^p - 1, ncol = length(Nmissing))
-    bins <- integer.base.b(1:(2^p - 1), 2)
-    for (i in 1:(2^p - 1)) {
-        inds <- which(bins[i, ] == 1)
-        D <- c(apply(Y, inds, sum))
-        Dmat <- t(matrix(D, ncol = length(Nmissing), nrow = length(D)))
-        Dmat[, 1] <- Dmat[, 1] + Nmissing
-        alpha <- rep(delta * 2^(p - sum(bins[i, ])), ncol(Dmat))
-        compLMLs[i, ] <- CompLogML(Dmat, alpha)
-    }
-    return(compLMLs)
-  }
-}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ Bayesian model averaging}

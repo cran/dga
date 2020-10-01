@@ -6,11 +6,12 @@ Computes Marginal Likelihoods for Each Clique and Value of Nmissing}
 \description{
  Assembles all of the pieces of the marginal likelihoods to be used to calculate the posterior probability of each model/value of Nmissing.}
 \usage{
-CompLogML(D, delta)
+CompLogML(D, Nmissing, delta)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{D}{A marginal table of the list overlap counts.}
+  \item{Nmissing}{Range on the number of missing individuals.}
   \item{delta}{The prior hyper parameter for the Dirichlet distribution. This has been properly re-scaled in bma.cr so that all marginal tables have consistent priors.}
 }
 
@@ -27,9 +28,9 @@ James Johndrow \email{james.johndrow@gmail.com} and Kristian Lum \email{kl@hrdag
 
 
 ## The function is currently defined as
-function (D, delta) 
+function (D, delta)
 {
-    out <- apply(lgamma(D + delta), 1, sum) - apply(lgamma(D * 
+    out <- apply(lgamma(D + delta), 1, sum) - apply(lgamma(D *
         0 + delta), 1, sum)
     return(out)
   }

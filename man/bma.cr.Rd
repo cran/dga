@@ -8,7 +8,7 @@ Bayesiam Model Averaging for Capture-Recapture}
 This function averages over all decomposable graphical models for p lists. }
 \usage{
 bma.cr(Y, Nmissing, delta, graphs, logprior = NULL,
-		log.prior.model.weights, normalize)
+		log.prior.model.weights)
 }
 \arguments{
   	\item{Y}{a \code{2^p} array of list intersection counts. }
