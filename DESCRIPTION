@@ -9,7 +9,7 @@ Authors@R: person(given = "Olivier",
                  role = c("aut", "cre"),
                  email = "olivier.binette@gmail.com")
 License: GPL (>= 2)
-LazyLoad: no
+LazyLoad: yes
 Imports: 
     graphics,
     Rcpp
