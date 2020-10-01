@@ -2,7 +2,7 @@
 
 ![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
 
-Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs capture-recapture estimation by averaging over decomposable graphical models. This approach builds on Madigan and York (1997)."
+Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs capture-recapture estimation by averaging over decomposable graphical models. This approach builds on Madigan and York (1997)." Higher performance is required to account for linkage errors through linkage-averaging and for simulation studies.
 
 ## Example usage
 
@@ -13,7 +13,8 @@ library(dgaFast) # Re-implements library(dga)
 
 # Number of lists and prior hyperparameter
 p = 5
-delta = 2^-p
+data(graphs5) # Decomposable graphical models on 5 lists.
+delta = 2^-p # Less informative prior
 Nmissing <- 1:300 # Reasonable range for the number of unobserved individuals.
 
 # Counts corresponding to list inclusion patterns.
@@ -27,6 +28,48 @@ weights <- bma.cr(Y,  Nmissing, delta, graphs5)
 # Plot of the posterior distribution.
 plotPosteriorN(weights, sum(Y) + Nmissing)
 ```
+
+Performance gain (2013 MacBook Pro 2.6 GHz Intel Core i5):
+
+```r
+res = bench::mark(
+     dga::bma.cr(Y,  Nmissing, delta, graphs5),
+     dgaFast::bma.cr(Y,  Nmissing, delta, graphs5), 
+     min_iterations=10, check=FALSE)
+```
+
+<center>
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> expression </th>
+   <th style="text-align:right;"> min </th>
+   <th style="text-align:right;"> median </th>
+   <th style="text-align:right;"> itr/sec </th>
+   <th style="text-align:right;"> mem_alloc </th>
+   <th style="text-align:right;"> gc/sec </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> dga </td>
+   <td style="text-align:right;"> 866.8ms </td>
+   <td style="text-align:right;"> 919.6ms </td>
+   <td style="text-align:right;"> 0.994153 </td>
+   <td style="text-align:right;"> 55.32MB </td>
+   <td style="text-align:right;"> 9.444453 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> dgaFast </td>
+   <td style="text-align:right;"> 11.3ms </td>
+   <td style="text-align:right;"> 12.5ms </td>
+   <td style="text-align:right;"> 76.286860 </td>
+   <td style="text-align:right;"> 2.17MB </td>
+   <td style="text-align:right;"> 1.956073 </td>
+  </tr>
+</tbody>
+</table>
+</center>
 
 ## Installation
 
