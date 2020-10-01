@@ -57,6 +57,7 @@ arma::mat computeLogPostProbs(const arma::mat& compMat,
 
   arma::mat weights(N, Nmissing);
   Rcpp::List graph;
+  Rcpp::List emptyList = Rcpp::List::create();
   for (int j = 1; j <= N; j++) {
     graph = as<List>(graphs[j-1]);
     if (graph.size() == 2) { // Both cliques and separators
@@ -70,7 +71,7 @@ arma::mat computeLogPostProbs(const arma::mat& compMat,
       computeML(weights, j,
                 compMat,
                 as<List>(graph)[0],
-                NULL,
+                emptyList,
                 denominator,
                 p);
     }
