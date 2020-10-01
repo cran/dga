@@ -64,13 +64,6 @@ MakeCompMatrix <- function(p, delta, Y, Nmissing){
   return(compLMLs)
 }
 
-tmpfun <- function(x,p){
-  tmp <- rep(0,p)
-  tmp[x] <- 1
-  return((tmp))
-}
-
-
 bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.weights=NULL, normalize=TRUE){
   #function to madigan + york style bma
   #Y is the array of counts.. should be dimension 2x2x2 (if p = 3)
@@ -100,16 +93,14 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
     #loop over all possible models
     #graph$C cliques of the graph
     #graph$S separators
-    binC <-t(sapply(graph$C, tmpfun, p = p))
-    decC <- colSums(t(binC)*rev(2^(0:(p-1))))
+    decC <- sapply(graph$C, function(g) sum(2^(p-g)))
     compMats <- compMat[decC,]
     if(!is.null(nrow(compMats))){
       cliqueML <- colSums(compMats)
     }else{cliqueML <- compMats}
 
     if(!is.null(graph$S)){
-      binS <-t(sapply(graph$S, tmpfun, p = p))
-      decS <- colSums(t(binS)*rev(2^(0:(p-1))))
+      decS <- sapply(graph$S, function(g) sum(2^(p-g)))
 
       compMats <- compMat[decS,]
       if(!is.null(nrow(compMats))){
