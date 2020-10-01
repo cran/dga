@@ -90,23 +90,15 @@ bma.cr <- function(Y, Nmissing, delta, graphs, logprior=NULL, log.prior.model.we
   D <- lgamma(sum(alpha)) - lgamma(Nmissing + sum(Y) + sum(alpha))
   j <- 1
   for(graph in graphs){
-    #loop over all possible models
-    #graph$C cliques of the graph
-    #graph$S separators
     decC <- sapply(graph$C, function(g) sum(2^(p-g)))
-    compMats <- compMat[decC,]
-    if(!is.null(nrow(compMats))){
-      cliqueML <- colSums(compMats)
-    }else{cliqueML <- compMats}
+    cliqueML <- colSums(compMat[decC, , drop=FALSE])
 
     if(!is.null(graph$S)){
       decS <- sapply(graph$S, function(g) sum(2^(p-g)))
-
-      compMats <- compMat[decS,]
-      if(!is.null(nrow(compMats))){
-        sepML <- colSums(compMats)
-      }else{sepML <- compMats}
-    } else{sepML <- 0; decS <- NULL}
+      sepML <- colSums(compMat[decS, , drop=FALSE])
+    } else{
+      sepML <- 0; decS <- NULL
+    }
 
     nsubgraphs <- length(decC) - length(decS)
 
