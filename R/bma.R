@@ -1,3 +1,12 @@
+#' @title Multiple Systems Estimation Using Decomposable Graphical Models
+#'
+#' @description Compute population size posterior distributions for decomposable graphical models. Given observed list inclusion pattern counts
+#'
+#' @usage bma.cr(Y, Nmissing, delta, graphs, logprior = NULL, log.prior.model.weights = NULL)
+#'
+#' @param Y a \code{p}-dimensional array (\code{2^p} elements) of list intersection counts.
+#'
+#'
 #' @export
 bma.cr <- function(Y, Nmissing, delta, graphs,
                    logprior = NULL,
