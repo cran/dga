@@ -1,7 +1,14 @@
+# MacOS
+.DS_Store
+
+# R and RStudio
+*.Rproj
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# Processed source
 src/*.o
 src/*.so
 src/*.dll
