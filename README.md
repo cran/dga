@@ -92,7 +92,8 @@ devtools::install_github("OlivierBinette/dgaFast")
 
 ## References
 - James Johndrow, Kristian Lum and Patrick Ball (2015). dga: Capture-Recapture
-  Estimation using Bayesian Model Averaging. R package version 1.2.
+  Estimation using Bayesian Model Averaging. _R package version 1.2._
   https://CRAN.R-project.org/package=dga
-- David Madigan and Jeremy C. York. "Bayesian methods for estimation of the size of a closed population." _Biometrika_. Vol. 84, No. 1 (Mar., 1997), pp.
+- David Madigan and Jeremy C. York (1997) Bayesian methods for estimation of the size of a closed population. _Biometrika_. Vol. 84, No. 1 (Mar., 1997), pp.
 19-31
+- Mauricio Sadinle (2018) Bayesian propagation of record linkage uncertainty into population size estimation of human rights violations. _Annals of Applied Statistics_ Vol. 12 No. 2  pp. 1013-1038

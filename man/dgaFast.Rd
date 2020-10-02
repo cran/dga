@@ -3,17 +3,30 @@
 \docType{package}
 \name{dgaFast}
 \alias{dgaFast}
-\alias{dgaFast-package}
+\alias{_PACKAGE}
+\alias{dga-package}
 \title{dgaFast: Multiple systems estimation using decomposable graphical models.}
 \description{
-This is an efficient re-implementation of the \code{dga} package of James Johndrow, Kristian Lum and Patrick Ball (2015) which implements Madigan and York (1997).
+Efficient re-implementation of the \code{dga} package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs capture-recapture estimation by averaging over decomposable graphical models. This approach builds on Madigan and York (1997)."
+}
+\note{
+Stratification functions and Venn diagram plotting functions from the \code{dga} package have not been reproduced in \code{dgaFast}. They can be accessed through \code{install.packages("dga"); library(dga)}.
+}
+\references{
+Madigan, David, and Jeremy C. York. "Bayesian methods for estimation of the size of a closed population."  Biometrika 84.1 (1997): 19-31.
+
+James Johndrow, Kristian Lum and Patrick Ball (2015). dga: Capture-Recapture Estimation using Bayesian Model Averaging. R package version 1.2. https://CRAN.R-project.org/package=dga
 }
 \author{
-\strong{Maintainer}: Olivier Binette \email{olivier.binette@gmail.com}
-
-Authors:
-\itemize{
-  \item Rebecca Steorts
+Olivier Binette and Rebecca C. Steorts
 }
-
-}
+\keyword{averaging}
+\keyword{bayesian}
+\keyword{capture-recapture}
+\keyword{decomposable}
+\keyword{estimation}
+\keyword{graphical}
+\keyword{model}
+\keyword{models}
+\keyword{multiple}
+\keyword{systems}

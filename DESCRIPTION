@@ -1,8 +1,8 @@
 Package: dgaFast
 Type: Package
 Title: Multiple Systems Estimation Using Decomposable Graphical Models
-Description: This is an efficient re-implementation of the dga package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs Bayesian model averaging for capture-recapture. This includes code to stratify records, check the strata for suitable overlap to be used for capture-recapture, and some functions to plot the estimated population size."
-Version: 0.0.0.1
+Description: This is an efficient re-implementation of the dga package of James Johndrow, Kristian Lum, and Patrick Ball (2015), which "performs Bayesian model averaging for capture-recapture. This includes code to stratify records, check the strata for suitable overlap to be used for capture-recapture, and some functions to plot the estimated population size."
+Version: 0.1.0
 Date: October 1, 2020
 Authors@R: c(person(given = "Olivier",
                  family = "Binette",
@@ -21,7 +21,7 @@ Suggests:
 NeedsCompilation: yes
 ByteCompile: yes
 Repository: GitHub
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9000
 LinkingTo: 
     Rcpp,
     RcppArmadillo
