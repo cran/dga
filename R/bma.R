@@ -1,3 +1,12 @@
+#' Function to compute bayesian model averaging
+#'
+#' @param Y A dataframe 
+#' @param Nmissing A sequence of values for the number of unobserved individuals 
+#' @param delta A type of prior
+#' @param graphs A decomposable graphical model
+#' @param logprior A NULL value for the logprior 
+#' @param log.prior.model.weights A NULL value for the log prior of the model weights
+#' @return Computes a records MMS
 #' @export
 bma.cr <- function(Y, Nmissing, delta, graphs,
                    logprior = NULL,
