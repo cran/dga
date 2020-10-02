@@ -4,10 +4,14 @@ Title: Multiple Systems Estimation Using Decomposable Graphical Models
 Description: This is an efficient re-implementation of the dga package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs Bayesian model averaging for capture-recapture. This includes code to stratify records, check the strata for suitable overlap to be used for capture-recapture, and some functions to plot the estimated population size."
 Version: 0.0.0.1
 Date: October 1, 2020
-Authors@R: person(given = "Olivier",
+Authors@R: c(person(given = "Olivier",
                  family = "Binette",
                  role = c("aut", "cre"),
-                 email = "olivier.binette@gmail.com")
+                 email = "olivier.binette@gmail.com"),
+             person(given = "Rebecca",
+                 family = "Steorts",
+                 role = c("aut"),
+                 email = "olivier.binette@gmail.com"))
 License: GPL (>= 2)
 LazyLoad: yes
 Imports: 
