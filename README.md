@@ -20,7 +20,7 @@ library(dgaFast) # Re-implements library(dga)
 # Number of lists and prior hyperparameter
 p = 5
 data(graphs5) # Decomposable graphical models on 5 lists.
-delta = 2^-p # Less informative prior
+delta = 0.5
 Nmissing <- 1:300 # Reasonable range for the number of unobserved individuals.
 
 # Counts corresponding to list inclusion patterns.
