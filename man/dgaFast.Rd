@@ -11,4 +11,9 @@ This is an efficient re-implementation of the \code{dga} package of James Johndr
 \author{
 \strong{Maintainer}: Olivier Binette \email{olivier.binette@gmail.com}
 
+Authors:
+\itemize{
+  \item Rebecca Steorts
+}
+
 }
