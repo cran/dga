@@ -35,6 +35,10 @@ weights <- bma.cr(Y,  Nmissing, delta, graphs5)
 plotPosteriorN(weights, sum(Y) + Nmissing)
 ```
 
+<center>
+   <img src="./figures/example.png" width="600">
+</center>
+
 ## Performance gain
 
 On a 2013 MacBook Pro 2.6 GHz Intel Core i5, the main routine of `dgaFast` is about 75 times faster than `dga`.
