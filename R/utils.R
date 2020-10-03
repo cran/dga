@@ -1,3 +1,14 @@
+
+#' Compute adjacency matrix of a decomposable graph
+adjMat = function(graph, p) {
+  mat = matrix(rep(0,p^2), nrow=p, ncol=p)
+  for (clique in graph$C) {
+    clique = c(clique)
+    mat[clique, clique] = 1
+  }
+  return(mat - diag(1, p))
+}
+
 CompLogML <- function(D, Nmissing, delta) {
   Nmissing <- Nmissing + D[1] + delta
   lgamma(Nmissing) + sum(lgamma(D[2:length(D)] + delta)) - length(D) * (lgamma(delta))
