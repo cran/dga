@@ -1,5 +1,7 @@
 
 #' Compute adjacency matrix of a decomposable graph
+#'
+#' @export
 adjMat = function(graph, p) {
   mat = matrix(rep(0,p^2), nrow=p, ncol=p)
   for (clique in graph$C) {
