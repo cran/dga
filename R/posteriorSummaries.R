@@ -24,7 +24,7 @@ posteriorSummaryTable <- function(weights, N, levels=c(0.025, 0.975), nrows = 10
 }
 
 #' @export
-htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10,  type="html", size=60, subplots=TRUE, bg="transparent") {
+htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10,  type="html", size=60, subplots=TRUE, bg=rgb(1,1,1,0)) {
 
   postSummary = posteriorSummaryTable(weights, N, levels, nrows)
 
