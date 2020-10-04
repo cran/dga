@@ -45,18 +45,17 @@ Table of top model estimates.
 htmlSummary("./figures/posteriorSummary/summaryTable.html", weights, N, nrows=5, graphs=graphs5)
 ```
 
-<center>
 <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-<!-- Sun Oct  4 11:35:10 2020 -->
-<table>
-<tr> <th> Model </th> <th> Posterior prob. </th> <th> Bayes est. </th> <th> Mode </th> <th> 0.025 </th> <th> 0.975 </th>  </tr>
-  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig1.svg' width=60> </td> <td align="right"> 0.22 </td> <td align="right"> 715.79 </td> <td align="right"> 713.00 </td> <td align="right"> 687.00 </td> <td align="right"> 752.00 </td> </tr>
-  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig2.svg' width=60> </td> <td align="right"> 0.16 </td> <td align="right"> 704.28 </td> <td align="right"> 703.00 </td> <td align="right"> 680.00 </td> <td align="right"> 734.00 </td> </tr>
-  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig3.svg' width=60> </td> <td align="right"> 0.08 </td> <td align="right"> 702.08 </td> <td align="right"> 699.00 </td> <td align="right"> 675.00 </td> <td align="right"> 737.00 </td> </tr>
-  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig4.svg' width=60> </td> <td align="right"> 0.07 </td> <td align="right"> 698.63 </td> <td align="right"> 697.00 </td> <td align="right"> 674.00 </td> <td align="right"> 729.00 </td> </tr>
-  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig5.svg' width=60> </td> <td align="right"> 0.05 </td> <td align="right"> 704.95 </td> <td align="right"> 703.00 </td> <td align="right"> 680.00 </td> <td align="right"> 736.00 </td> </tr>
+<!-- Sun Oct  4 12:12:30 2020 -->
+<table >
+<tr> <th> Model </th> <th> Posterior </th> <th> Prob. </th> <th> Bayes est. </th> <th> Mode </th> <th> 0.025 </th> <th> 0.975 </th>  </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig1.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.posterior1.svg' width=60> </td> <td align="right"> 0.22 </td> <td align="right"> 716.00 </td> <td align="right"> 713.00 </td> <td align="right"> 687.00 </td> <td align="right"> 752.00 </td> </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig2.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.posterior2.svg' width=60> </td> <td align="right"> 0.16 </td> <td align="right"> 704.00 </td> <td align="right"> 703.00 </td> <td align="right"> 680.00 </td> <td align="right"> 734.00 </td> </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig3.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.posterior3.svg' width=60> </td> <td align="right"> 0.08 </td> <td align="right"> 702.00 </td> <td align="right"> 699.00 </td> <td align="right"> 675.00 </td> <td align="right"> 737.00 </td> </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig4.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.posterior4.svg' width=60> </td> <td align="right"> 0.07 </td> <td align="right"> 699.00 </td> <td align="right"> 697.00 </td> <td align="right"> 674.00 </td> <td align="right"> 729.00 </td> </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.fig5.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.html.posterior5.svg' width=60> </td> <td align="right"> 0.05 </td> <td align="right"> 705.00 </td> <td align="right"> 703.00 </td> <td align="right"> 680.00 </td> <td align="right"> 736.00 </td> </tr>
    </table>
-</center>
+
 
 
 ## Performance gain
