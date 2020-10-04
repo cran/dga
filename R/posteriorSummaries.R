@@ -42,7 +42,7 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
       model_index = postSummary$Model[i]
       file = paste0(filepath, ".fig", i, ".svg")
       svg(file, width=3, height=3, bg=bg)
-      plotGraph(graphs[[model_index]])
+      plotGraph(graphs[[model_index]], bg=bg)
       dev.off()
 
       table[i,"Model"] = paste0("<img src='./", basename(file), "' width=", size, ">")
@@ -55,7 +55,7 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
       svg(file, width=4, height=3, bg=bg)
       par(mar=c(2,0,2,0))
       plot(N, weights[model_index,]/sum(weights[model_index,]),
-           type="l", xlab="", ylab="", axes=F)
+           lwd=2, type="l", xlab="", ylab="", axes=F)
       axis(1)
       dev.off()
 

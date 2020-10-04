@@ -19,7 +19,7 @@ plotGraph <- function(graph,
                       label.font=2,
                       label.prop=0.9,
                       label.norm="OO",
-                      bg=FALSE,
+                      bg=rgb(1,1,1,0),
                       ...) {
   p = length(unique(unlist(graph$C)))
 
