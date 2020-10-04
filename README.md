@@ -8,7 +8,7 @@ Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum
 
 Higher performance is needed to account for linkage errors through linkage-averaging and for simulation studies.
 
-Further plotting and posterior summarization functions have been added.
+Further plotting and posterior summarization functions have been added (`bayesEstimator`, `posteriorMode`, `posteriorQuantiles`, `posteriorSummaryTable`, `adjMatrix`, `plotGraph`, `htmlSummary`, `latexSummary`).
 
 **Note:** the stratification functions and Venn diagram plotting functions from the `dga` package have not been reproduced in `dgaFast`. They can be accessed through `install.packages("dga"); library(dga)`.
 
