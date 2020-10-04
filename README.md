@@ -45,7 +45,7 @@ plotPosteriorN(weights, N)
 Table of top model estimates (see also `dgaFast::latexSummary`).
 
 ```r
-htmlSummary("./figures/posteriorSummary/summaryTable.html", weights, N, nrows=5, graphs=graphs5)
+htmlSummary("./figures/posteriorSummary/summaryTable", weights, N, nrows=5, graphs=graphs5)
 ```
 
 <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
