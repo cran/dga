@@ -15,7 +15,10 @@ License: GPL (>= 2)
 LazyLoad: yes
 Imports: 
     graphics,
-    Rcpp
+    Rcpp,
+    xtable,
+    qgraph,
+    tikzDevice
 Suggests:
     dga
 NeedsCompilation: yes
