@@ -52,7 +52,7 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
     for (i in 1:nrow(postSummary)) {
       model_index = postSummary$Model[i]
       file = paste0(filepath, ".posterior", i, ".svg")
-      svg(file, width=4, height=3, bg=bg)
+      svg(file, width=2, height=3/2, bg=bg)
       par(mar=c(2,0,2,0))
       plot(N, weights[model_index,]/sum(weights[model_index,]),
            lwd=2, type="l", xlab="", ylab="", axes=F)
