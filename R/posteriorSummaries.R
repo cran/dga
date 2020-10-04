@@ -24,7 +24,7 @@ posteriorSummaryTable <- function(weights, N, levels=c(0.025, 0.975), nrows = 10
 }
 
 #' @export
-htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10,  type="html", size=60, subplots=TRUE, bg=grDevices::rgb(1,1,1,0)) {
+htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10, size=60, subplots=TRUE, bg=grDevices::rgb(1,1,1,0)) {
 
   postSummary = posteriorSummaryTable(weights, N, levels, nrows)
 
@@ -45,7 +45,7 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
       plotGraph(graphs[[model_index]], bg=bg)
       grDevices::dev.off()
 
-      table[i,"Model"] = paste0("<img src='./", basename(file), "' width=", size, ">")
+      table[i,"Model"] = paste0("<img src='", file, "' width=", size, ">")
     }
   }
   if (subplots) {
@@ -59,10 +59,56 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
       graphics::axis(1)
       grDevices::dev.off()
 
-      table[i,"Posterior"] = paste0("<img src='./", basename(file), "' width=", size, ">")
+      table[i,"Posterior"] = paste0("<img src='", file, "' width=", size, ">")
     }
   }
 
-  xtable::print.xtable(table, file=filepath, type=type, sanitize.text.function=function(x) x, include.rownames=FALSE, html.table.attributes="")
+  xtable::print.xtable(table, file=paste0(filepath, ".html"), type="html", sanitize.text.function=function(x) x, include.rownames=FALSE, html.table.attributes="")
 }
+
+#' @export
+latexSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10, height="0.5in", subplots=TRUE, bg=grDevices::rgb(1,1,1,0)) {
+
+  postSummary = posteriorSummaryTable(weights, N, levels, nrows)
+
+  cols = colnames(postSummary)
+  # Prepare space for posterior plots
+  if (subplots) {
+    postSummary$Posterior = postSummary$Model
+    postSummary = postSummary[, c(cols[1], "Posterior", cols[2:length(cols)])]
+  }
+
+  table = xtable::xtable(postSummary, auto=TRUE)
+
+  if (!is.null(graphs)) {
+    for (i in 1:nrow(postSummary)) {
+      model_index = postSummary$Model[i]
+      file = paste0(filepath, "_fig", i, ".pdf")
+      grDevices::pdf(file, width=3, height=3, bg=bg)
+      plotGraph(graphs[[model_index]], bg=bg)
+      grDevices::dev.off()
+
+      table[i,"Model"] = paste0("\\includegraphics[height=",height,",align=c]{", file, "}")
+    }
+  }
+  if (subplots) {
+    for (i in 1:nrow(postSummary)) {
+      model_index = postSummary$Model[i]
+      file = paste0(filepath, "_posterior", i, ".pdf")
+      grDevices::pdf(file, width=2, height=3/2, bg=bg)
+      graphics::par(mar=c(2,0,2,0))
+      graphics::plot(N, weights[model_index,]/sum(weights[model_index,]),
+                     lwd=2, type="l", xlab="", ylab="", axes=F)
+      graphics::axis(1)
+      grDevices::dev.off()
+
+      table[i,"Posterior"] = paste0("\\includegraphics[height=",height,",align=c]{", file, "}")
+    }
+  }
+
+  xtable::print.xtable(table, file=paste0(filepath, ".tex"), type="latex", sanitize.text.function=function(x) x, include.rownames=FALSE)
+}
+
+latexSummary("./figures/posteriorSummary/summaryTable", weights, N, nrows=5, graphs=graphs5)
+
 
