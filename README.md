@@ -8,6 +8,8 @@ Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum
 
 Higher performance is needed to account for linkage errors through linkage-averaging and for simulation studies.
 
+Further plotting and posterior summarization functions have been added (`bayesEstimator`, `posteriorMode`, `posteriorQuantiles`, `posteriorSummaryTable`, `adjMatrix`, `plotGraph`, `htmlSummary`, `latexSummary`).
+
 **Note:** the stratification functions and Venn diagram plotting functions from the `dga` package have not been reproduced in `dgaFast`. They can be accessed through `install.packages("dga"); library(dga)`.
 
 ## Example usage
@@ -26,18 +28,38 @@ Nmissing <- 1:300 # Reasonable range for the number of unobserved individuals.
 # Counts corresponding to list inclusion patterns.
 Y = c(0,27,37,19,4,4,1,1,97,22,37,25,2,1,3,5,83,36,34,18,3,5,0,2,30,5,23,8,0,3,0,2)
 Y <- array(Y, dim=c(2,2,2,2,2))
+N = sum(Y) + Nmissing
 
 # Model-wise posterior probaiblities on the total population size.
 # weights[i,j] is the posterior probability for j missing individuals under model graphs5[[j]].
 weights <- bma.cr(Y,  Nmissing, delta, graphs5)
 
 # Plot of the posterior distribution.
-plotPosteriorN(weights, sum(Y) + Nmissing)
+plotPosteriorN(weights, N)
 ```
 
 <center>
    <img src="./figures/example.png" width="600">
 </center>
+
+Table of top model estimates (see also `dgaFast::latexSummary`).
+
+```r
+htmlSummary("./figures/posteriorSummary/summaryTable.html", weights, N, nrows=5, graphs=graphs5)
+```
+
+<!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
+<!-- Sun Oct  4 13:41:07 2020 -->
+<table >
+<tr> <th> Model </th> <th> Posterior </th> <th> Prob. </th> <th> Bayes est. </th> <th> Mode </th> <th> 0.025 </th> <th> 0.975 </th>  </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.fig1.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.posterior1.svg' width=60> </td> <td align="right"> 0.217 </td> <td align="right"> 627 </td> <td align="right"> 624 </td> <td align="right"> 598 </td> <td align="right"> 663 </td> </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.fig2.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.posterior2.svg' width=60> </td> <td align="right"> 0.160 </td> <td align="right"> 615 </td> <td align="right"> 614 </td> <td align="right"> 591 </td> <td align="right"> 645 </td> </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.fig3.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.posterior3.svg' width=60> </td> <td align="right"> 0.082 </td> <td align="right"> 613 </td> <td align="right"> 610 </td> <td align="right"> 586 </td> <td align="right"> 648 </td> </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.fig4.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.posterior4.svg' width=60> </td> <td align="right"> 0.065 </td> <td align="right"> 610 </td> <td align="right"> 608 </td> <td align="right"> 585 </td> <td align="right"> 640 </td> </tr>
+  <tr> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.fig5.svg' width=60> </td> <td align="right"> <img src='./figures/posteriorSummary/summaryTable.posterior5.svg' width=60> </td> <td align="right"> 0.052 </td> <td align="right"> 616 </td> <td align="right"> 614 </td> <td align="right"> 591 </td> <td align="right"> 647 </td> </tr>
+   </table>
+
+
 
 ## Performance gain
 
