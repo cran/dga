@@ -46,7 +46,7 @@ htmlSummary("./figures/posteriorSummary/summaryTable.html", weights, N, nrows=5,
 ```
 
 <center>
-   <include src="./figures/posteriorSummary/summaryTable.html"></include>
+   ![](./figures/posteriorSummary/summaryTable.html)
 </center>
 
 
