@@ -41,6 +41,6 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
     }
   }
 
-  print(table, file=filepath, type=type, sanitize.text.function=function(x) x, include.rownames=FALSE)
+  print(table, file=filepath, type=type, sanitize.text.function=function(x) x, include.rownames=FALSE, html.table.attributes="")
 }
 
