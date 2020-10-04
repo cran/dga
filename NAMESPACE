@@ -2,10 +2,13 @@
 
 export(adjMat)
 export(assert)
+export(bayesEstimator)
 export(bma.cr)
 export(htmlSummary)
 export(plotGraph)
 export(plotPosteriorN)
+export(posteriorMode)
+export(posteriorQuantiles)
 export(posteriorSummaryTable)
 import(Rcpp)
 useDynLib(dgaFast, .registration=TRUE)

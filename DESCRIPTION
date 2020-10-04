@@ -14,10 +14,12 @@ Authors@R: c(person(given = "Olivier",
 License: GPL (>= 2)
 LazyLoad: yes
 Imports: 
+    rlang,
     graphics,
     Rcpp,
     xtable,
     qgraph,
+    grDevices,
     tikzDevice
 Suggests:
     dga
