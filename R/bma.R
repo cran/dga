@@ -14,14 +14,18 @@ bma.cr <- function(Y, Nmissing, delta, graphs,
   if (is.null(logprior)) {
     logprior <- -log(sum(Y) + Nmissing)
   }
+  if (length(delta) == 1) {
+    delta = rep(delta, length(Y))
+    delta = array(delta, dim=dim(Y))
+  }
 
   Y[1] <- 0
   p <- length(dim(Y))
-  alpha <- rep(delta, length(Y))
+  s_delta = sum(delta)
 
   # Precomputations
   compMat <- MakeCompMatrix(p, delta, Y, Nmissing)
-  D <- lgamma(sum(alpha)) - lgamma(Nmissing + sum(Y) + sum(alpha))
+  D <- lgamma(s_delta) - lgamma(Nmissing + sum(Y) + s_delta)
   multinomialCoefficient <- lgamma(Nmissing + sum(Y) + 1) - sum(lgamma(Y[-1] + 1)) - lgamma(Nmissing + 1)
 
   # Compute log posterior for all models
