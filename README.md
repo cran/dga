@@ -42,7 +42,7 @@ plotPosteriorN(weights, N)
    <img src="./figures/example.png" width="600">
 </center>
 
-Table of top model estimates.
+Table of top model estimates (see also `latexSummary`).
 
 ```r
 htmlSummary("./figures/posteriorSummary/summaryTable.html", weights, N, nrows=5, graphs=graphs5)
