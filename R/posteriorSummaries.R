@@ -35,7 +35,7 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
     postSummary = postSummary[, c(cols[1], "Posterior", cols[2:length(cols)])]
   }
 
-  table = xtable::xtable(postSummary)
+  table = xtable::xtable(postSummary, auto=TRUE)
 
   if (!is.null(graphs)) {
     for (i in 1:nrow(postSummary)) {
