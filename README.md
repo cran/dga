@@ -39,6 +39,15 @@ plotPosteriorN(weights, sum(Y) + Nmissing)
    <img src="./figures/example.png" width="600">
 </center>
 
+```r
+htmlSummary("./figures/posteriorSummary/summaryTable.html", weights, N, nrows=5, graphs=graphs5)
+```
+
+<center>
+   <include src="./figures/posteriorSummary/summaryTable.html"></include>
+</center>
+
+
 ## Performance gain
 
 On a 2013 MacBook Pro 2.6 GHz Intel Core i5, the main routine of `dgaFast` is about 75 times faster than `dga`.

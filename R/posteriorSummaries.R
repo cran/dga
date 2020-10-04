@@ -24,7 +24,7 @@ posteriorSummaryTable <- function(weights, N, levels=c(0.025, 0.975), nrows = 10
 }
 
 #' @export
-htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10,  type="html", size=60, ...) {
+htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10,  type="html", size=60) {
 
   postSummary = posteriorSummaryTable(weights, N, levels, nrows)
   table = xtable::xtable(postSummary)
@@ -41,6 +41,6 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
     }
   }
 
-  print(table, file=filepath, type=type, sanitize.text.function=function(x)x)
+  print(table, file=filepath, type=type, sanitize.text.function=function(x)x, include.rownames=FALSE)
 }
 

@@ -18,3 +18,5 @@ png("./figures/example.png", width=1200, height=800, res=200)
 # Plot of the posterior distribution.
 plotPosteriorN(weights, sum(Y) + Nmissing)
 dev.off()
+
+htmlSummary("./figures/posteriorSummary/summaryTable.html", weights, N, nrows=5, graphs=graphs5)
