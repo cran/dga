@@ -9,6 +9,19 @@ plotPosteriorN <- function(weights, N, main = NULL) {
   graphics::legend("topright", legend = c("Averaged Post. Prob.", "Post. Prob. By Model"), lty = c(1, 2), cex = .75)
 }
 
+#' Plot decomposable graphical model
+#'
+#' @param graph decomposable graph as in `data(graphs5)`.
+#' @param labels Parameter passed to `qgraph::qgraph` with default TRUE.
+#' @param layout Parameter passed to `qgraph::qgraph` with default "circle".
+#' @param normalize Parameter passed to `qgraph::qgraph` with default FALSE.
+#' @param edge.color Parameter passed to `qgraph::qgraph` with default "black".
+#' @param edge.width Parameter passed to `qgraph::qgraph` with default 1.5.
+#' @param label.font Parameter passed to `qgraph::qgraph` with default 2.
+#' @param label.norm Parameter passed to `qgraph::qgraph` with default "OO".
+#' @param bg Parameter passed to `qgraph::qgraph` with default `rgb(1,1,1,0)` for a transparent background.
+#' @param ... Further arguments passed to `qgraph::qgraph`.
+#'
 #' @export
 plotGraph <- function(graph,
                       labels=TRUE,
@@ -17,7 +30,6 @@ plotGraph <- function(graph,
                       edge.color="black",
                       edge.width=1.5,
                       label.font=2,
-                      label.prop=0.9,
                       label.norm="OO",
                       bg=grDevices::rgb(1,1,1,0),
                       ...) {
@@ -30,7 +42,6 @@ plotGraph <- function(graph,
          edge.color=edge.color,
          edge.width=edge.width,
          label.font=label.font,
-         label.prop=label.prop,
          label.norm=label.norm,
          bg=bg,
          ...)

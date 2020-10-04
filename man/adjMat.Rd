@@ -6,6 +6,14 @@
 \usage{
 adjMat(graph, p)
 }
+\arguments{
+\item{graph}{Decomposable graph as in `data(graphs5)`.}
+
+\item{p}{of vertices of the graph.}
+}
+\value{
+Adjacency matrix.
+}
 \description{
 Compute adjacency matrix of a decomposable graph
 }
