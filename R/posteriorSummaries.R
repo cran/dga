@@ -24,7 +24,7 @@ posteriorSummaryTable <- function(weights, N, levels=c(0.025, 0.975), nrows = 10
 }
 
 #' @export
-htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10,  type="html", size=60, subplots=TRUE) {
+htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975), nrows = 10,  type="html", size=60, subplots=TRUE, bg="transparent") {
 
   postSummary = posteriorSummaryTable(weights, N, levels, nrows)
 
@@ -41,7 +41,7 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
     for (i in 1:nrow(postSummary)) {
       model_index = postSummary$Model[i]
       file = paste0(filepath, ".fig", i, ".svg")
-      svg(file, width=3, height=3)
+      svg(file, width=3, height=3, bg=bg)
       plotGraph(graphs[[model_index]])
       dev.off()
 
@@ -52,7 +52,7 @@ htmlSummary <- function(filepath, weights, N, graphs=NULL, levels=c(0.025, 0.975
     for (i in 1:nrow(postSummary)) {
       model_index = postSummary$Model[i]
       file = paste0(filepath, ".posterior", i, ".svg")
-      svg(file, width=3, height=3)
+      svg(file, width=4, height=3, bg=bg)
       par(mar=c(2,0,2,0))
       plot(N, weights[model_index,]/sum(weights[model_index,]),
            type="l", xlab="", ylab="", axes=F)
