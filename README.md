@@ -4,11 +4,11 @@
 [![Build Status](https://travis-ci.com/OlivierBinette/dga.svg?branch=master)](https://travis-ci.com/OlivierBinette/dga)  [![R build status](https://github.com/OlivierBinette/dga/workflows/R-CMD-check/badge.svg)](https://github.com/OlivierBinette/dga/actions) ![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)
 <!-- badges: end -->
 
-Efficient re-implementation of the `dga` package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs capture-recapture estimation by averaging over decomposable graphical models. This approach builds on Madigan and York (1997)." 
+Efficient re-implementation and extension of the `dga` package of James Johndrow, Kristian Lum and Patrick Ball (2015): "Performs capture-recapture estimation by averaging over decomposable graphical models. This approach builds on Madigan and York (1997)." 
 
-Higher performance is needed to account for linkage errors through linkage-averaging and for simulation studies.
+- Higher performance is needed to account for linkage errors through linkage-averaging and for simulation studies.
 
-Further plotting and posterior summarization functions have been added (`bayesEstimator`, `posteriorMode`, `posteriorQuantiles`, `posteriorSummaryTable`, `adjMatrix`, `plotGraph`, `htmlSummary`, `latexSummary`).
+- Further plotting and posterior summarization functions have been added (`bayesEstimator`, `posteriorMode`, `posteriorQuantiles`, `posteriorSummaryTable`, `adjMatrix`, `plotGraph`, `htmlSummary`, `latexSummary`).
 
 **Note:** the stratification functions and Venn diagram plotting functions from the `dga` package have not been reproduced in `dgaFast`. They can be accessed through `install.packages("dga"); library(dga)`.
 
