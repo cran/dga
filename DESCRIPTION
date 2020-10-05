@@ -10,7 +10,7 @@ Authors@R: c(person(given = "Olivier",
                  email = "olivier.binette@gmail.com"),
              person(given = "Rebecca",
                  family = "Steorts",
-                 role = c("aut", "fnd")),
+                 role = c("aut", "fnd"))
                  )
 License: GPL (>= 2)
 LazyLoad: yes
