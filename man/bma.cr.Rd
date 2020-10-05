@@ -22,7 +22,7 @@ bma.cr(Y, Nmissing, delta, graphs, logprior = NULL, log.prior.model.weights = NU
 \item{alpha}{Fractional posterior distribution hyperparameter. Defaults is 1 for regular posterior distirbutions.}
 }
 \value{
-
+This function returns a matrix of weights, where rows correspond to models and columns correspond to values of Nmissing. Thus, the \code{ij}th entry of the matrix is the posterior probability of the \code{i}th model and the \code{j}th entry of Nmissing. Row sums return posterior probabilities by model.Column sums return posterior probabilities by value of  Nmissing.
 }
 \description{
 Compute population size posterior distributions for decomposable graphical models.
@@ -61,5 +61,5 @@ plotPosteriorN(weights, N)
 
 }
 \author{
-Adapted by Olivier Binette \email{olivier.binette@gmail.com} from the dga::bma.cr function of James Johndrow \email{james.johndrow@gmail.com} and Kristian Lum \emai{kl@hrdag.org}
+Adapted by Olivier Binette \email{olivier.binette@gmail.com} from the dga::bma.cr function of James Johndrow \email{james.johndrow@gmail.com} and Kristian Lum \email{kl@hrdag.org}
 }

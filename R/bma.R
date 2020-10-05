@@ -12,11 +12,11 @@
 #' @param log.prior.model.weights Prior weights on the graphs. This should be a vector of the same length as `graphs`.
 #' @param alpha Fractional posterior distribution hyperparameter. Defaults is 1 for regular posterior distirbutions.
 #'
-#' @return This function returns a matrix of weights, where rows correspond to models and columns correspond to values of Nmissing. Thus, the \code{ij}th entry of the matrix is the posterior probability of the \code{i}th model and the \code{j}th entry of Nmissing. Row sums return posterior probabilities by model.Column sums return posterior probabilities by value of  Nmissing.}
+#' @return This function returns a matrix of weights, where rows correspond to models and columns correspond to values of Nmissing. Thus, the \code{ij}th entry of the matrix is the posterior probability of the \code{i}th model and the \code{j}th entry of Nmissing. Row sums return posterior probabilities by model.Column sums return posterior probabilities by value of  Nmissing.
 #'
 #' @details This is the main function in this package.  It performs capture-recapture (or multiple systems estimation) using Bayesian model averaging as outlined in Madigan and York (1997).
 #'
-#' @author Adapted by Olivier Binette \email{olivier.binette@gmail.com} from the dga::bma.cr function of James Johndrow \email{james.johndrow@gmail.com} and Kristian Lum \emai{kl@hrdag.org}
+#' @author Adapted by Olivier Binette \email{olivier.binette@gmail.com} from the dga::bma.cr function of James Johndrow \email{james.johndrow@gmail.com} and Kristian Lum \email{kl@hrdag.org}
 #'
 #' @examples
 #' #### 5 list example from M & Y ##########
