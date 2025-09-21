@@ -1,6 +1,6 @@
-9f5fd3e1a5f1087d285ae68de6f00561 *DESCRIPTION
+f83cc1e56dda703f6b64625273abea4f *DESCRIPTION
 d5fcd83a472e569e8990d5040180445d *NAMESPACE
-c502eeb69adfab948afee93ec70489f7 *NEWS.md
+7d2acfc112e53528a845efd3ded18c92 *NEWS.md
 30e2319848c0123d05d0d1a3ea825233 *R/BMAfunctions.R
 81fa410e059e29a4feb66bc050613e36 *R/RcppExports.R
 78d17649ec9a258e582747c973941b15 *R/data.R
@@ -32,9 +32,9 @@ cfffe48bae7f11448ba834de87db0694 *man/remove.close.ellipse.Rd
 7e07a5b9d916d845011a5ab4c50faf88 *man/sfunction.Rd
 dd685f7361793d2173e1a6a4c2b1fd83 *man/venn3.Rd
 374d08f1b64bd35e649925c72546ab79 *man/venn4.Rd
-69c265a3271939265ad7560d12afefa3 *src/Makevars
-e4a9a47c4a3aca98677ab8b16336e5de *src/Makevars.win
-76b70fce46f6868edabd3b402954139f *src/RcppExports.cpp
+f96798631f6ec0ca5ee5919a2af93af7 *src/Makevars
+55fb0740b57fe2d1a95fd95ee0753363 *src/Makevars.win
+80093dc2ce1e8ec165b8dd722ca5d3d8 *src/RcppExports.cpp
 88092ab438fbb1b2995850fc13a912c0 *src/utils.cpp
 d55bb415a9a2fccdd34847ac0a5445f9 *tests/testthat.R
 e2f93a46a73efb844341d8fe22745592 *tests/testthat/test-BMAfunctions.R
